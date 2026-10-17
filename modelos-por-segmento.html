@@ -1,0 +1,943 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Modelos de Site</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Modelos de site com agendamento online, fotos dos trabalhos e loja. Escolha o seu segmento e veja os modelos.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Anton&family=Archivo:wght@400;600;700&family=Barlow:wght@400;600;700&family=Cormorant+Garamond:wght@500;600&family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Italiana&family=Jost:wght@300;400;500&family=Manrope:wght@400;600;700&family=Nunito+Sans:wght@400;700&family=Syne:wght@600;700;800&display=swap">
+<style>
+/* Layout: a vitrine com abas em cima; abaixo, cada modelo é um site completo com a própria identidade. */
+:root{
+  --bg:#f3f2f4; --panel:#ffffff; --fg:#19171c; --muted:#615c68; --line:#dcd9e0; --accent:#5b3fd1; --accent-ink:#ffffff;
+  --ui:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#131216;--panel:#1c1a21;--fg:#eeecf2;--muted:#a29dab;--line:#2f2c36;--accent:#a493ff;--accent-ink:#141218;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#131216;--panel:#1c1a21;--fg:#eeecf2;--muted:#a29dab;--line:#2f2c36;--accent:#a493ff;--accent-ink:#141218;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--bg);color:var(--fg);font-family:var(--ui);font-size:15px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--panel)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* ---------- Vitrine ---------- */
+.v-top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--panel);border-bottom:1px solid var(--line)}
+.v-top-in{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;padding-block:10px}
+.v-brand{font-weight:700;letter-spacing:.01em;margin-right:auto;display:flex;align-items:baseline;gap:8px}
+.v-brand small{font-weight:400;color:var(--muted)}
+.v-tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;max-width:100%}
+.v-tabs::-webkit-scrollbar{display:none}
+.v-group{display:flex;align-items:center;gap:4px;padding-right:6px;border-right:1px solid var(--line)}
+.v-group:last-child{border-right:0}
+.v-group > span{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:0 4px;white-space:nowrap}
+.v-tab{border:1px solid transparent;background:transparent;border-radius:999px;padding:6px 12px;cursor:pointer;white-space:nowrap;font-size:14px}
+.v-tab:hover{border-color:var(--line)}
+.v-tab[aria-selected="true"]{background:var(--fg);color:var(--bg)}
+.v-info{max-width:1240px;margin:0 auto;padding-block:18px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 24px;align-items:end}
+.v-info h1{margin:0;font-size:22px;line-height:1.2;text-wrap:balance}
+.v-info p{margin:4px 0 0;color:var(--muted);max-width:70ch}
+.v-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+.v-chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:3px 10px;background:var(--panel);white-space:nowrap}
+.v-chip b{font-weight:700;color:var(--accent)}
+.v-frame{max-width:1240px;margin:0 auto 48px;border-radius:14px;overflow:clip;border:1px solid var(--line);box-shadow:0 20px 50px -30px rgba(0,0,0,.45)}
+.v-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--panel);border-bottom:1px solid var(--line);font-size:12px;color:var(--muted)}
+.v-bar i{width:10px;height:10px;border-radius:50%;background:var(--line);display:inline-block}
+.v-bar .url{margin-left:8px;padding:3px 10px;border-radius:6px;background:var(--bg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.v-outer{margin-inline:max(16px,env(safe-area-inset-left,0px))}
+@media (max-width:720px){.v-info{grid-template-columns:1fr}.v-chips{justify-content:flex-start}}
+
+/* ---------- Página de segurança ---------- */
+.sec{max-width:1040px;margin:0 auto;padding-block:8px 64px;display:grid;gap:20px}
+.sec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.sec-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
+.sec-card h3{margin:0 0 10px;font-size:16px}
+.sec-card ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--fg)}
+.sec-card li span{color:var(--muted)}
+.sec-card code,.sec pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px}
+.sec pre{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;overflow-x:auto;margin:0;white-space:pre}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-right:6px}
+.tag.ok{background:color-mix(in srgb,#1f9d61 18%,transparent);color:#1f9d61}
+.tag.warn{background:color-mix(in srgb,#d08a00 20%,transparent);color:#b07400}
+
+/* ---------- Site (cada modelo define suas variáveis) ---------- */
+.site{--r:6px;background:var(--s-bg);color:var(--s-ink);font-family:var(--s-body);position:relative;overflow-x:clip}
+.site *{box-sizing:border-box}
+.site a{color:inherit}
+.s-in{max-width:1180px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+.s-sec{padding-block:72px}
+.s-sec.alt{background:var(--s-surface)}
+.s-eyebrow{font-family:var(--s-body);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--s-accent);font-weight:700;margin:0 0 10px}
+.s-h2{font-family:var(--s-display);font-weight:var(--s-dw,400);font-size:clamp(30px,4.4vw,48px);line-height:1.04;margin:0 0 14px;text-wrap:balance;letter-spacing:var(--s-dls,0)}
+.s-lead{color:var(--s-muted);max-width:56ch;margin:0;font-size:16px}
+.s-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:34px}
+.s-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--s-accent);background:var(--s-accent);color:var(--s-accent-ink);padding:12px 20px;border-radius:var(--r);font-weight:700;cursor:pointer;text-decoration:none;font-size:14px;letter-spacing:.02em;transition:transform .15s,filter .15s}
+.s-btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.s-btn.ghost{background:transparent;color:var(--s-ink);border-color:var(--s-line)}
+.s-btn.sm{padding:8px 14px;font-size:13px}
+.s-btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.site :focus-visible{outline:2px solid var(--s-accent);outline-offset:2px}
+
+/* imagem com fundo próprio: se a foto não carregar, o bloco continua bonito */
+.ph{margin:0;position:relative;overflow:hidden;background:var(--s-ph);border-radius:var(--r);isolation:isolate}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;max-width:100%}
+.ph.noimg img{display:none}
+.ph.noimg::after{content:attr(data-label);position:absolute;inset:auto 12px 12px 12px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--s-ph-ink);opacity:.9}
+.ph.noimg::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 14px,color-mix(in srgb,var(--s-ph-ink) 9%,transparent) 14px 15px)}
+
+/* nav */
+.s-nav{position:relative;z-index:3;border-bottom:1px solid var(--s-line)}
+.s-nav .s-in{display:flex;align-items:center;gap:22px;min-height:68px;flex-wrap:wrap;padding-block:10px}
+.s-logo{font-family:var(--s-display);font-size:24px;font-weight:var(--s-dw,400);text-decoration:none;letter-spacing:var(--s-dls,0);line-height:1;margin-right:auto;display:flex;align-items:center;gap:10px}
+.s-logo .mk{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--s-accent);display:grid;place-items:center;font-size:15px;color:var(--s-accent)}
+.s-links{display:flex;gap:20px;font-size:14px;flex-wrap:wrap}
+.s-links button{background:none;border:0;padding:4px 0;cursor:pointer;color:var(--s-muted)}
+.s-links button:hover{color:var(--s-ink)}
+.s-open{font-size:12px;display:inline-flex;align-items:center;gap:6px;color:var(--s-muted);white-space:nowrap}
+.s-open i{width:8px;height:8px;border-radius:50%;background:#2fb36b;box-shadow:0 0 0 3px color-mix(in srgb,#2fb36b 25%,transparent)}
+.s-open.closed i{background:#d0533f;box-shadow:0 0 0 3px color-mix(in srgb,#d0533f 25%,transparent)}
+@media (max-width:820px){.s-links{display:none}}
+
+/* hero */
+.s-hero{position:relative}
+.h-overlay{min-height:560px;display:flex;align-items:flex-end}
+.h-overlay > .ph{position:absolute;inset:0;border-radius:0;z-index:0}
+.h-overlay > .ph.noimg::after{display:none}
+.h-overlay::after{content:"";position:absolute;inset:0;background:var(--s-hero-shade);z-index:1}
+.h-overlay .s-in{position:relative;z-index:2;padding-block:120px 64px;width:100%}
+.h-title{font-family:var(--s-display);font-weight:var(--s-dw,400);font-size:clamp(40px,7vw,84px);line-height:.98;margin:0 0 18px;max-width:14ch;text-wrap:balance;letter-spacing:var(--s-dls,0)}
+.h-sub{font-size:17px;color:var(--s-muted);max-width:48ch;margin:0 0 26px}
+.h-ctas{display:flex;gap:10px;flex-wrap:wrap}
+.h-meta{display:flex;flex-wrap:wrap;gap:22px;margin-top:34px;font-size:13px;color:var(--s-muted)}
+.h-meta b{display:block;font-family:var(--s-display);font-size:26px;color:var(--s-ink);font-weight:var(--s-dw,400);line-height:1.1}
+.h-split .s-in{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:48px;align-items:center;padding-block:72px}
+.h-split .pics{display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:220px 220px;gap:12px}
+.h-split .pics .ph:first-child{grid-row:span 2}
+.h-edit .s-in{padding-block:64px 0}
+.h-edit .h-title{max-width:none;font-size:clamp(44px,9vw,128px);line-height:.92}
+.h-edit .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;margin-bottom:36px}
+.h-edit .strip{display:grid;grid-template-columns:2fr 1fr 1.3fr;gap:12px;height:360px}
+@media (max-width:860px){
+  .h-split .s-in{grid-template-columns:1fr}
+  .h-split .pics{grid-template-rows:170px 170px}
+  .h-edit .row{grid-template-columns:1fr}
+  .h-edit .strip{grid-template-columns:1fr 1fr;height:auto;grid-auto-rows:180px}
+  .h-edit .strip .ph:first-child{grid-column:span 2}
+  .h-overlay{min-height:480px}
+}
+.marquee{overflow:hidden;border-block:1px solid var(--s-line);background:var(--s-accent);color:var(--s-accent-ink)}
+.marquee div{display:flex;gap:28px;white-space:nowrap;padding-block:12px;font-family:var(--s-display);font-size:22px;letter-spacing:.04em;animation:mq 26s linear infinite;width:max-content}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* serviços */
+.svc-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.chip{border:1px solid var(--s-line);background:transparent;padding:7px 14px;border-radius:999px;cursor:pointer;font-size:13px;color:var(--s-muted)}
+.chip[aria-pressed="true"]{background:var(--s-ink);color:var(--s-bg);border-color:var(--s-ink)}
+.svc-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:0 40px}
+.svc{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;padding:18px 0;border-bottom:1px solid var(--s-line);align-items:center}
+.svc h4{margin:0;font-size:17px;font-weight:700}
+.svc p{margin:0;color:var(--s-muted);font-size:13.5px}
+.svc .pr{font-family:var(--s-display);font-size:22px;font-weight:var(--s-dw,400);white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
+.svc .pr small{display:block;font-family:var(--s-body);font-size:11px;color:var(--s-muted);letter-spacing:.04em}
+.svc .go{grid-column:2;justify-self:end}
+.svc .meta{grid-column:1}
+
+/* galeria */
+.gal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:210px;gap:12px}
+.gal .ph:nth-child(1){grid-column:span 2;grid-row:span 2}
+.gal .ph:nth-child(6){grid-column:span 2}
+.gal figcaption{position:absolute;left:10px;bottom:10px;z-index:2;font-size:12px;background:color-mix(in srgb,var(--s-bg) 82%,transparent);backdrop-filter:blur(4px);padding:4px 10px;border-radius:999px;color:var(--s-ink)}
+.ph.noimg figcaption{display:none}
+.gal .ph[hidden]{display:none}
+@media (max-width:820px){.gal{grid-template-columns:1fr 1fr;grid-auto-rows:160px}.gal .ph:nth-child(6){grid-column:span 1}}
+
+/* antes e depois */
+.ba{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:var(--r);overflow:hidden;background:var(--s-ph)}
+.ba .ph{position:absolute;inset:0;border-radius:0}
+.ba .after{clip-path:inset(0 0 0 var(--cut,50%))}
+.ba .line{position:absolute;top:0;bottom:0;left:var(--cut,50%);width:2px;background:#fff;z-index:3;pointer-events:none;box-shadow:0 0 12px rgba(0,0,0,.4)}
+.ba .lb{position:absolute;top:12px;z-index:3;font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:rgba(0,0,0,.55);color:#fff;padding:4px 10px;border-radius:999px}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;z-index:4;margin:0}
+.ba-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:40px;align-items:center}
+@media (max-width:820px){.ba-wrap{grid-template-columns:1fr}}
+
+/* equipe */
+.team{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:18px}
+.pro .ph{aspect-ratio:4/5;max-width:100%;margin-bottom:12px}
+.pro h4{margin:0;font-size:17px}
+.pro p{margin:2px 0 10px;color:var(--s-muted);font-size:13.5px}
+
+/* planos */
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px}
+.plan{border:1px solid var(--s-line);border-radius:var(--r);padding:26px;display:flex;flex-direction:column;gap:12px;background:var(--s-bg)}
+.plan.hot{border-color:var(--s-accent);box-shadow:0 0 0 1px var(--s-accent) inset}
+.plan h4{margin:0;font-size:15px;letter-spacing:.08em;text-transform:uppercase}
+.plan .big{font-family:var(--s-display);font-size:42px;line-height:1;font-weight:var(--s-dw,400);font-variant-numeric:tabular-nums}
+.plan .big small{font-family:var(--s-body);font-size:14px;color:var(--s-muted)}
+.plan ul{margin:0;padding-left:18px;color:var(--s-muted);font-size:14px;display:grid;gap:4px;flex:1}
+
+/* fidelidade */
+.loyal{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
+.card-stamps{border:1px dashed var(--s-accent);border-radius:calc(var(--r) + 6px);padding:26px;background:var(--s-bg)}
+.stamps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:18px 0}
+.stamp{aspect-ratio:1;max-width:100%;border-radius:50%;border:1.5px solid var(--s-line);display:grid;place-items:center;font-size:12px;color:var(--s-muted)}
+.stamp.on{background:var(--s-accent);border-color:var(--s-accent);color:var(--s-accent-ink);font-weight:700}
+@media (max-width:820px){.loyal{grid-template-columns:1fr}}
+
+/* quiz */
+.quiz{border:1px solid var(--s-line);border-radius:var(--r);padding:24px;background:var(--s-bg);display:grid;gap:14px}
+.quiz .q{display:flex;flex-wrap:wrap;gap:8px}
+.quiz .res{border-top:1px solid var(--s-line);padding-top:14px;min-height:48px}
+
+/* loja */
+.shop{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:18px}
+.prod{display:flex;flex-direction:column;gap:8px}
+.prod .ph{aspect-ratio:1;max-width:100%}
+.prod h4{margin:4px 0 0;font-size:15px}
+.prod p{margin:0;font-size:13px;color:var(--s-muted)}
+.prod .row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto}
+.prod .price{font-weight:700;font-variant-numeric:tabular-nums}
+.cart{margin-top:24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;border:1px solid var(--s-line);border-radius:var(--r);padding:14px 18px;background:var(--s-bg)}
+.cart .sum{font-variant-numeric:tabular-nums}
+.cart .sum b{font-size:18px}
+
+/* gift card */
+.gift{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
+.gift-card{aspect-ratio:1.6;max-width:100%;border-radius:16px;padding:26px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(135deg,var(--s-ink),color-mix(in srgb,var(--s-ink) 70%,var(--s-accent)));color:var(--s-bg)}
+.gift-card .v{font-family:var(--s-display);font-size:44px;line-height:1}
+@media (max-width:820px){.gift{grid-template-columns:1fr}}
+
+/* avaliações */
+.revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:18px}
+.rev{border-top:2px solid var(--s-accent);padding-top:16px}
+.rev .st{color:var(--s-accent);letter-spacing:2px}
+.rev p{margin:8px 0;font-size:15px}
+.rev small{color:var(--s-muted)}
+
+/* agendamento */
+.book{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px;align-items:start}
+.bk-step{border:1px solid var(--s-line);border-radius:var(--r);padding:20px;background:var(--s-bg);display:grid;gap:12px}
+.bk-step + .bk-step{margin-top:14px}
+.bk-step h4{margin:0;font-size:14px;letter-spacing:.08em;text-transform:uppercase;display:flex;gap:10px;align-items:center}
+.bk-step h4 i{font-style:normal;width:24px;height:24px;border-radius:50%;background:var(--s-accent);color:var(--s-accent-ink);display:grid;place-items:center;font-size:12px}
+.fld{display:grid;gap:6px;font-size:13px;color:var(--s-muted)}
+.fld input,.fld select,.fld textarea{width:100%;background:var(--s-surface);border:1px solid var(--s-line);border-radius:calc(var(--r) - 2px);padding:11px 12px;color:var(--s-ink);font-size:15px}
+.fld textarea{min-height:76px;resize:vertical}
+.fld .err{color:#e0563f;font-size:12px;min-height:1em}
+.fld input[aria-invalid="true"]{border-color:#e0563f}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.days{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.day{flex:0 0 auto;min-width:64px;border:1px solid var(--s-line);background:var(--s-surface);border-radius:calc(var(--r) - 2px);padding:8px 6px;text-align:center;cursor:pointer;line-height:1.2}
+.day small{display:block;font-size:11px;color:var(--s-muted);text-transform:uppercase;letter-spacing:.06em}
+.day b{font-size:18px}
+.day[aria-pressed="true"],.slot[aria-pressed="true"]{background:var(--s-accent);color:var(--s-accent-ink);border-color:var(--s-accent)}
+.day[aria-pressed="true"] small{color:inherit}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:8px}
+.slot{border:1px solid var(--s-line);background:var(--s-surface);border-radius:calc(var(--r) - 2px);padding:8px 0;cursor:pointer;font-variant-numeric:tabular-nums}
+.slot:disabled{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+.pros{display:flex;gap:8px;flex-wrap:wrap}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--s-muted)}
+.consent input{margin-top:3px;accent-color:var(--s-accent)}
+.summary{position:sticky;top:120px;border:1px solid var(--s-line);border-radius:var(--r);padding:22px;background:var(--s-bg);display:grid;gap:12px}
+.summary h4{margin:0;font-family:var(--s-display);font-size:24px;font-weight:var(--s-dw,400)}
+.summary dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 14px;font-size:14px}
+.summary dt{color:var(--s-muted)}
+.summary dd{margin:0;text-align:right;overflow-wrap:anywhere}
+.summary .tot{display:flex;justify-content:space-between;border-top:1px solid var(--s-line);padding-top:12px;font-weight:700;font-size:17px;font-variant-numeric:tabular-nums}
+.ok-box{border:1px solid var(--s-accent);border-radius:var(--r);padding:20px;display:grid;gap:10px;background:var(--s-bg)}
+.ok-box pre{white-space:pre-wrap;margin:0;font-family:inherit;font-size:14px;background:var(--s-surface);padding:12px;border-radius:calc(var(--r) - 2px);border:1px solid var(--s-line)}
+.ok-box .num{font-size:12px;color:var(--s-muted);word-break:break-all}
+@media (max-width:900px){.book{grid-template-columns:1fr}.summary{position:static}}
+@media (max-width:480px){.two{grid-template-columns:1fr}}
+
+/* unidades */
+.units{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px}
+.unit{border:1px solid var(--s-line);border-radius:var(--r);overflow:hidden;background:var(--s-bg)}
+.unit .ph{aspect-ratio:16/10;max-width:100%;border-radius:0}
+.unit div.t{padding:16px;display:grid;gap:4px}
+.unit div.t p{margin:0;color:var(--s-muted);font-size:13.5px}
+
+/* rodapé */
+.s-foot{border-top:1px solid var(--s-line);padding-block:44px;font-size:14px;color:var(--s-muted)}
+.s-foot .s-in{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:24px}
+.s-foot h5{margin:0 0 8px;color:var(--s-ink);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.s-foot p{margin:0 0 4px}
+.s-mbar{position:sticky;bottom:0;z-index:8;display:flex;justify-content:flex-end;gap:8px;padding:12px max(18px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px));pointer-events:none}
+.s-mbar > *{pointer-events:auto}
+.wa-fab{background:#1fa855;color:#fff;border:0;border-radius:999px;padding:12px 18px;font-weight:700;cursor:pointer;box-shadow:0 10px 24px -8px rgba(0,0,0,.5);font-size:14px}
+.s-mbar .s-btn{display:none;box-shadow:0 10px 24px -8px rgba(0,0,0,.5)}
+@media (max-width:820px){
+  .s-mbar{justify-content:stretch;background:color-mix(in srgb,var(--s-bg) 88%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--s-line);pointer-events:auto}
+  .s-mbar .s-btn{display:inline-flex;flex:1}
+  .s-mbar .wa-fab{box-shadow:none}
+}
+/* menu do celular */
+.s-menu{display:none;background:none;border:1px solid var(--s-line);color:var(--s-ink);border-radius:var(--r);width:42px;height:42px;cursor:pointer;font-size:18px;line-height:1}
+@media (max-width:820px){
+  .s-menu{display:inline-grid;place-items:center}
+  .s-nav .s-in{gap:10px}
+  .s-nav .s-in > .s-btn{display:none}
+  .s-open{order:5;width:100%}
+  .s-links.open{display:grid;order:6;width:100%;gap:0;border-top:1px solid var(--s-line);padding-top:6px}
+  .s-links.open button{text-align:left;padding:12px 0;font-size:17px;color:var(--s-ink);border-bottom:1px solid var(--s-line)}
+  .s-sec{padding-block:52px}
+  .s-head{margin-bottom:24px}
+  .h-title{font-size:clamp(38px,11vw,60px)}
+  .h-overlay .s-in{padding-block:90px 40px}
+  .h-meta{gap:16px}
+  .svc .go{grid-column:1/-1;justify-self:stretch}
+  .svc .go.s-btn{padding:10px}
+  .gal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding-bottom:6px;margin-inline:-18px;padding-inline:18px}
+  .gal .ph{flex:0 0 78%;height:300px;scroll-snap-align:center}
+  .gal .ph[hidden]{display:none}
+  .team{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .shop{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .pro .s-btn,.prod .s-btn{width:100%}
+  .prod .row{flex-direction:column;align-items:stretch}
+  .bk-step{padding:16px}
+}
+/* stories (premium) */
+.stories{display:flex;gap:14px;overflow-x:auto;padding-block:18px;scrollbar-width:none}
+.stories::-webkit-scrollbar{display:none}
+.story{flex:0 0 auto;display:grid;justify-items:center;gap:6px;background:none;border:0;color:var(--s-ink);cursor:pointer;font-size:12px;width:76px}
+.story .ring{width:72px;height:72px;border-radius:50%;padding:3px;background:conic-gradient(var(--s-accent),color-mix(in srgb,var(--s-accent) 40%,var(--s-ink)),var(--s-accent))}
+.story .ring .ph{width:100%;height:100%;border-radius:50%;border:3px solid var(--s-bg)}
+.story .ring .ph.noimg::after{display:none}
+/* visualizador de fotos */
+.lb-ov{position:fixed;inset:0;z-index:100;background:rgba(8,6,10,.92);display:grid;grid-template-rows:auto minmax(0,1fr) auto;padding:calc(12px + env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));color:#fff;font-family:var(--ui)}
+.lb-ov .bars{display:flex;gap:4px;margin-bottom:10px}
+.lb-ov .bars i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.3);overflow:hidden}
+.lb-ov .bars i b{display:block;height:100%;width:0;background:#fff}
+.lb-ov .bars i.done b{width:100%}
+.lb-ov .bars i.run b{animation:fill 4s linear forwards}
+@keyframes fill{to{width:100%}}
+.lb-ov .stage{display:grid;place-items:center;min-height:0;position:relative}
+.lb-ov .stage .ph{width:min(100%,880px);height:100%;max-height:78vh;background:#222;--s-ph-ink:#ddd;border-radius:12px}
+.lb-ov .stage .ph img{object-fit:contain}
+.lb-ov .nav{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr}
+.lb-ov .nav button{background:none;border:0;cursor:pointer}
+.lb-ov .foot{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:12px}
+.lb-ov .x{background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:999px;padding:10px 16px;cursor:pointer;font-size:14px}
+.gal .ph{cursor:zoom-in}
+/* vitrine no celular: site em tela cheia, sem moldura */
+@media (max-width:720px){
+  .v-outer{margin-inline:0}
+  .v-frame{border-radius:0;border-inline:0;box-shadow:none}
+  .v-bar{display:none}
+  .v-brand small{display:none}
+  .v-top{position:static}
+  .v-info{padding-block:12px}
+  .v-info h1{font-size:18px}
+  .v-info p{font-size:13.5px}
+}
+.note{font-size:12px;color:var(--s-muted)}
+
+/* ---------- identidades ---------- */
+.m-navalha{--s-bg:#1b1410;--s-surface:#251c16;--s-ink:#f2e7d7;--s-muted:#b8a58e;--s-line:#3b2f26;--s-accent:#c9973f;--s-accent-ink:#1b1410;--s-ph:#3a2a1f;--s-ph-ink:#e9d6b8;--s-display:"Abril Fatface",Georgia,serif;--s-body:"Archivo",system-ui,sans-serif;--s-hero-shade:linear-gradient(180deg,rgba(27,20,16,.25),rgba(27,20,16,.92) 78%);--r:2px}
+.m-urbano{--s-bg:#ecebe7;--s-surface:#ffffff;--s-ink:#121212;--s-muted:#55534e;--s-line:#cfccc5;--s-accent:#ffd21f;--s-accent-ink:#121212;--s-ph:#c9c6be;--s-ph-ink:#1c1c1c;--s-display:"Anton",Impact,"Arial Narrow",sans-serif;--s-body:"Barlow",system-ui,sans-serif;--s-dls:.01em;--r:0px}
+.m-urbano .s-btn{border-color:var(--s-ink);box-shadow:4px 4px 0 var(--s-ink)}
+.m-urbano .s-btn.ghost{box-shadow:none}
+.m-barao{--s-bg:#0e1d18;--s-surface:#142821;--s-ink:#ede6d6;--s-muted:#a7ae9f;--s-line:#25392f;--s-accent:#cdac6b;--s-accent-ink:#0e1d18;--s-ph:#1d332a;--s-ph-ink:#d8c9a5;--s-display:"Cormorant Garamond",Georgia,serif;--s-dw:600;--s-body:"Manrope",system-ui,sans-serif;--r:4px}
+.m-flor{--s-bg:#fbf2f0;--s-surface:#ffffff;--s-ink:#3a2a2e;--s-muted:#866b70;--s-line:#ecd9d6;--s-accent:#b24e66;--s-accent-ink:#ffffff;--s-ph:#f0d9d6;--s-ph-ink:#7a4652;--s-display:"Fraunces",Georgia,serif;--s-dw:500;--s-body:"Nunito Sans",system-ui,sans-serif;--r:20px}
+.m-aurora{--s-bg:#220f30;--s-surface:#2e1641;--s-ink:#fbeefc;--s-muted:#c8a9d6;--s-line:#43275a;--s-accent:#ff7c5c;--s-accent-ink:#220f30;--s-ph:#3a1d51;--s-ph-ink:#f1c9ff;--s-display:"Syne",system-ui,sans-serif;--s-dw:800;--s-dls:-.02em;--s-body:"DM Sans",system-ui,sans-serif;--s-hero-shade:linear-gradient(110deg,rgba(34,15,48,.94) 30%,rgba(34,15,48,.35) 75%,rgba(255,124,92,.25));--r:12px}
+.m-maison{--s-bg:#ffffff;--s-surface:#f4f2ef;--s-ink:#151413;--s-muted:#6c6862;--s-line:#e3dfd9;--s-accent:#9a7a4c;--s-accent-ink:#ffffff;--s-ph:#e9e4dc;--s-ph-ink:#6c5a3e;--s-display:"Italiana",Georgia,serif;--s-body:"Jost",system-ui,sans-serif;--s-dls:.01em;--r:0px}
+.m-maison .h-edit .h-title{letter-spacing:-.01em;font-size:clamp(44px,7vw,100px)}
+.m-urbano .h-edit .h-title{text-transform:uppercase;line-height:1.02}
+.m-urbano .s-eyebrow{color:var(--s-ink);background:var(--s-accent);display:inline-block;padding:3px 8px}
+.site a.s-btn{color:var(--s-accent-ink)}
+.site a.s-btn.ghost{color:var(--s-ink)}
+.m-navalha .h-title{max-width:13ch}
+/* ---------- Entrada: escolha do segmento ---------- */
+:root[data-niche="barbearia"]{--accent:#a8742a}
+:root[data-niche="salao"]{--accent:#b24e66}
+@media (prefers-color-scheme: dark){
+  :root[data-niche="barbearia"]:not([data-theme="light"]){--accent:#d8a85a}
+  :root[data-niche="salao"]:not([data-theme="light"]){--accent:#f08aa3}
+}
+:root[data-theme="dark"][data-niche="barbearia"]{--accent:#d8a85a}
+:root[data-theme="dark"][data-niche="salao"]{--accent:#f08aa3}
+.v-brand #brand{color:var(--fg)}
+:root[data-niche] .v-brand #brand{color:var(--accent)}
+.v-swap{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;cursor:pointer;font-size:13px;color:var(--muted);white-space:nowrap}
+.v-swap:hover{color:var(--fg)}
+.pick-wrap{max-width:1040px;margin:0 auto;padding-block:32px 64px;display:grid;gap:28px}
+.pick-wrap header h1{margin:0;font-size:clamp(26px,4vw,38px);line-height:1.12;text-wrap:balance}
+.pick-wrap header p{margin:8px 0 0;color:var(--muted);max-width:60ch;font-size:16px}
+.picks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px}
+.pick{position:relative;display:flex;align-items:flex-end;min-height:380px;border:0;border-radius:18px;overflow:hidden;padding:0;cursor:pointer;text-align:left;color:#fff;background:#2a2622;isolation:isolate;transition:transform .2s}
+.pick:hover{transform:translateY(-3px)}
+.pick img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .5s}
+.pick:hover img{transform:scale(1.04)}
+.pick::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.82))}
+.pick.b{background:#2b1f17}.pick.s{background:#4a2a33}
+.pick div{padding:24px;display:grid;gap:6px}
+.pick h2{margin:0;font-size:30px;line-height:1.05}
+.pick.b h2{font-family:"Abril Fatface",Georgia,serif;font-weight:400}
+.pick.s h2{font-family:"Fraunces",Georgia,serif;font-weight:500}
+.pick p{margin:0;opacity:.88;font-size:15px}
+.pick span{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-weight:700;font-size:14px;padding:9px 16px;border-radius:999px;width:max-content}
+.pick.b span{background:#c9973f;color:#1b1410}
+.pick.s span{background:#f3c3cf;color:#3a2a2e}
+@media (max-width:720px){.pick{min-height:300px}.pick-wrap{padding-block:20px 48px}}
+</style>
+
+
+<header class="v-top">
+  <div class="v-top-in wrap">
+    <div class="v-brand"><span id="brand">Modelos de site</span> <small id="brand-sub">com agendamento online</small></div>
+    <button class="v-swap" id="swap" type="button" hidden>Trocar</button>
+    <nav class="v-tabs" role="tablist" aria-label="Modelos" id="tabs"></nav>
+  </div>
+</header>
+<section class="v-info wrap" id="info" aria-live="polite"></section>
+<main id="stage"></main>
+
+<script>
+"use strict";
+/* ===== utilidades ===== */
+const IMG = (id, w = 900) => id.startsWith("px:")
+  ? `https://images.pexels.com/photos/${id.slice(3)}/pexels-photo-${id.slice(3)}.jpeg?auto=compress&cs=tinysrgb&w=${w}`
+  : `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=70`;
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const brl = v => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const ph = (id, label, cls = "", w = 900, cap = "") =>
+  `<figure class="ph ${cls}" data-label="${esc(label)}"><img src="${IMG(id, w)}" alt="${esc(label)}" loading="lazy" decoding="async" referrerpolicy="no-referrer">${cap ? `<figcaption>${esc(cap)}</figcaption>` : ""}</figure>`;
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+};
+
+/* fotos reais (Unsplash e Pexels, licença gratuita; "px:" = Pexels) */
+const B = { // barbearia
+  a: "1503951914875-452162b0f3f1", b: "1585747860715-2ba37e788b70", c: "1622296089863-eb7fc530daa8", d: "1599351431202-1e0f0137899a",
+  e: "1622286342621-4bd786c2447c", f: "1605497788044-5a32c7078486", g: "1621605815971-fbc98d665033", h: "1567894340315-735d7c361db0",
+  i: "px:3998429", j: "px:2040189", k: "1596728325488-58c87691e9af", l: "1512690459411-b9245aed614b", m: "px:1813272", n: "px:897262"
+};
+const S = { // salão
+  a: "1560066984-138dadb4c035", b: "1522337360788-8b13dee7a37e", c: "1562322140-8baeececf3df", d: "1633681926022-84c23e8cb2d6",
+  e: "1595476108010-b4d1f102b1b1", f: "px:3993449", g: "1519699047748-de8e457a634e", h: "1487412947147-5cebf100ffc2",
+  i: "px:3065209", j: "1600948836101-f9ffda59d250", k: "px:5069494",
+  n1: "1604654894610-df63bc536371", n2: "1610992015732-2449b76344bc", n3: "1632345031435-8727f6897d53", n4: "1519014816548-bf5fe059798b", n5: "1607779097040-26e80aa78e66"
+};
+const P = { // produtos sem marca aparente
+  oleo: "1608571423902-eed4a5ad8108", pomada: "1619451334792-150fd785ee74", shampoo: "px:6621462", pos: "1620916566398-39f1143ab7be",
+  kit: "1621607505833-616916c46a25", perfume: "px:4202325", kitq: "1612817288484-6f916006741a", serum: "1600428877878-1a0fd85beda8",
+  cuticula: "px:4041392", creme: "px:1029896", base: "1617897903246-719242758050", maos: "px:4210373", mascara: "1601049541289-9b1b7bbbfe19",
+  oleocab: "px:8467963", leavein: "px:4465124", shampoo2: "px:7795755", vela: "1602874801007-bd458bb1b8b6"
+};
+const MEN = ["1507003211169-0a1dd7228f2d", "1500648767791-00dcc994a43e", "1506794778202-cad84cf45f1d", "1519085360753-af0119f7cbe7"];
+const WOM = ["1494790108377-be9c29b29330", "1438761681033-6461ffad8d80", "1544005313-94ddf0286df2", "1534528741775-53994a69daeb"];
+
+/* ===== os 6 modelos ===== */
+const MODELS = [
+{
+  id: "navalha", tier: "Simples", group: "Barbearia", tab: "Navalha Clássica", cls: "m-navalha", hero: "overlay",
+  size: "Pequena", pitch: "Versão enxuta para barbearia de bairro: serviços, fotos, equipe e agendamento. Leve, rápido e fácil de usar no celular.",
+  feats: ["Agendamento", "Portfólio", "Equipe", "Aberto agora"],
+  logo: "Navalha Clássica", mark: "N", domain: "navalhaclassica.com.br",
+  eyebrow: "Barbearia de bairro desde 1998",
+  title: "Corte de respeito e navalha afiada.",
+  sub: "Toalha quente, cadeira de couro e aquele papo bom. Marque seu horário em menos de um minuto.",
+  heroImg: B.a, meta: [["26 anos", "de casa aberta"], ["4,9 ★", "312 avaliações no Google"], ["15 min", "tempo médio de espera: zero"]],
+  hours: { open: 9, close: 20, sat: 18, closed: [0] }, slotMin: 45, wa: "5511900000000",
+  addr: "Rua das Palmeiras, 120 · Centro · São Paulo/SP", insta: "@navalhaclassica",
+  cats: {
+    "Cabelo": [["Corte tradicional", "Máquina e tesoura, finalizado com navalha", 45, 45], ["Corte na tesoura", "Para quem gosta de volume e caimento", 50, 55], ["Degradê", "Do zero ao topo, bem marcado", 45, 50]],
+    "Barba": [["Barba com toalha quente", "Óleo, toalha quente e navalha", 30, 40], ["Pezinho e acabamento", "Entre um corte e outro", 15, 15]],
+    "Combos": [["Corte + barba", "O clássico da casa", 75, 80], ["Pai e filho", "Dois cortes, um horário", 80, 85]]
+  },
+  team: [["Seu Antônio", "Fundador · navalha clássica", MEN[2]], ["Rafael", "Degradê e cortes modernos", MEN[0]], ["Diego", "Barba e desenho", MEN[1]]],
+  gallery: [[B.c, "Degradê navalhado", "Cabelo"], [B.i, "Barba desenhada", "Barba"], [B.j, "Clássico social", "Cabelo"], [B.g, "Ferramentas da casa", "Casa"], [B.k, "Toalha quente", "Barba"], [B.b, "Nosso salão", "Casa"]],
+  plans: { title: "Clube Navalha", lead: "Pague por mês e corte quantas vezes quiser. Cancela quando quiser, direto no WhatsApp.", items: [["Corte livre", 99, ["Cortes ilimitados", "Seg a qui", "10% na loja"]], ["Corte + barba", 149, ["Cortes e barbas ilimitados", "Qualquer dia", "15% na loja"], true]] },
+  shop: [[P.oleo, "Óleo para barba", "Cedro e sândalo, 30 ml", 34.9], [P.pomada, "Pomada modeladora", "Efeito matte, fixação média", 39.9], [P.shampoo, "Shampoo de barba", "Limpa sem ressecar, 150 ml", 29.9], [P.pos, "Pós-barba", "Loção calmante, 120 ml", 27.9]],
+  reviews: [["Melhor barba da região. O Seu Antônio é um artista com a navalha.", "Marcos T."], ["Agendei pelo celular em 30 segundos e fui atendido na hora.", "Felipe R."], ["Levo meu filho desde os 5 anos. Atendimento de família.", "Ricardo A."]]
+},
+{
+  id: "urbano", tier: "Completo", group: "Barbearia", tab: "Corte Urbano", cls: "m-urbano", hero: "edit",
+  size: "Média", pitch: "Estilo street e moderno para público jovem, com freestyle, platinado e assinatura.",
+  feats: ["Agendamento", "Assinatura", "Loja", "Escolha do barbeiro"],
+  logo: "CORTE URBANO", mark: "CU", domain: "corteurbano.com.br",
+  eyebrow: "Barbearia · Zona Leste · SP",
+  title: "Corte na régua. Sem enrolação.",
+  sub: "Degradê, freestyle e platinado com quem entende. Escolha o barbeiro, o horário e pronto.",
+  strip: [B.f, B.d, B.h], marquee: ["DEGRADÊ", "NAVALHADO", "FREESTYLE", "PLATINADO", "BARBA", "SOBRANCELHA"],
+  hours: { open: 10, close: 21, sat: 20, closed: [1] }, slotMin: 40, wa: "5511900000000",
+  addr: "Av. Celso Garcia, 2.450 · Tatuapé · São Paulo/SP", insta: "@corteurbano",
+  cats: {
+    "Cortes": [["Degradê / navalhado", "Disfarçado do jeito que você pedir", 40, 40], ["Freestyle com desenho", "Risco e desenho à mão livre", 55, 55], ["Corte infantil", "Até 12 anos", 35, 35]],
+    "Química": [["Platinado", "Descoloração e matização", 90, 120], ["Luzes", "Mechas com touca", 75, 100]],
+    "Barba e extras": [["Barba", "Na régua com navalha", 30, 35], ["Sobrancelha", "Na navalha", 10, 15], ["Combo corte + barba", "O mais pedido", 60, 70]]
+  },
+  team: [["Kaique", "Freestyle e desenhos", MEN[3]], ["Lukinha", "Degradê na régua", MEN[0]], ["Matheus", "Barba e navalhado", MEN[1]], ["Bruna", "Platinado e luzes", WOM[3]]],
+  gallery: [[B.e, "Degradê na régua", "Cortes"], [B.h, "Navalhado", "Cortes"], [B.f, "Freestyle", "Cortes"], [B.d, "Barba alinhada", "Barba"], [B.l, "A cadeira", "Casa"], [B.k, "Acabamento", "Barba"]],
+  plans: { title: "Assinatura Na Régua", lead: "Fica sempre alinhado pagando um valor fixo por mês.", items: [["Na régua", 89, ["Cortes ilimitados", "Seg a qui", "Prioridade na agenda"]], ["Régua + barba", 129, ["Cortes e barbas ilimitados", "Todos os dias", "1 sobrancelha por mês"], true], ["Família", 199, ["2 pessoas", "Cortes ilimitados", "Infantil incluso"]]] },
+  shop: [[P.pomada, "Pomada efeito seco", "Fixação forte, sem brilho", 35], [P.shampoo, "Shampoo matizador", "Para platinados, 250 ml", 45], [P.oleo, "Óleo de barba", "Hidrata e alinha os fios", 32], [P.kitq, "Kit pós-química", "Shampoo + máscara", 79]],
+  reviews: [["Freestyle do Kaique é outro nível. Saí com o desenho perfeito.", "Vinícius S."], ["Assinatura vale muito a pena, corto toda semana.", "Gabriel M."], ["Platinado ficou top e sem estragar o cabelo.", "Enzo L."]]
+},
+{
+  id: "barao", tier: "Premium", group: "Barbearia", tab: "Barão Club", cls: "m-barao", hero: "split",
+  size: "Grande / rede", pitch: "Barbearia premium com várias unidades, planos, terapias e antes/depois.",
+  feats: ["Destaques tipo stories", "Várias unidades", "Planos", "Antes e depois", "Loja"],
+  logo: "Barão Grooming Club", mark: "B", domain: "baraoclub.com.br",
+  eyebrow: "Grooming masculino · 3 unidades",
+  title: "Cuidado masculino em outro padrão.",
+  sub: "Barbeiros especialistas, terapias de barba, cerveja artesanal e manobrista. Escolha a unidade mais perto de você.",
+  pics: [B.b, B.c, B.i], meta: [["3", "unidades em SP"], ["18", "barbeiros"], ["4,9 ★", "2.300 avaliações"]],
+  hours: { open: 9, close: 22, sat: 20, closed: [] }, slotMin: 30, wa: "5511900000000",
+  units: [["Jardins", "Rua Oscar Freire, 900", B.l], ["Moema", "Al. dos Maracatins, 410", B.m], ["Alphaville", "Al. Rio Negro, 1.030", B.b]],
+  addr: "Atendimento central: (11) 4000-0000", insta: "@baraoclub",
+  cats: {
+    "Cabelo": [["Corte Barão", "Consultoria de visagismo inclusa", 50, 90], ["Camuflagem de grisalhos", "Natural, sem efeito tinta", 40, 80]],
+    "Barba": [["Barboterapia", "Toalhas quentes, óleos e massagem", 40, 70], ["Corte + barboterapia", "A experiência completa", 90, 150]],
+    "Rituais": [["Limpeza de pele", "Extração e máscara calmante", 50, 120], ["Day Groom", "Corte, barba, limpeza e massagem", 150, 290]]
+  },
+  team: [["Henrique Saad", "Master barber · Jardins", MEN[2]], ["Paulo Vidal", "Visagismo · Moema", MEN[3]], ["Otávio Reis", "Barboterapia · Alphaville", MEN[0]], ["André Lobo", "Grisalhos · Jardins", MEN[1]]],
+  gallery: [[B.j, "Corte Barão", "Cabelo"], [B.i, "Barboterapia", "Barba"], [B.a, "Navalha", "Barba"], [B.g, "Bancada", "Casa"], [B.c, "Social clássico", "Cabelo"], [B.l, "Unidade Jardins", "Casa"]],
+  beforeAfter: [B.n, B.d, "Barba cheia para barba desenhada, 40 minutos com o Otávio."],
+  plans: { title: "Planos Barão", lead: "Use em qualquer unidade. Cobrança mensal, sem fidelidade.", items: [["Prata", 189, ["2 cortes por mês", "1 barboterapia", "Bebida cortesia"]], ["Ouro", 289, ["Cortes ilimitados", "2 barboterapias", "10% na loja"], true], ["Black", 449, ["Cortes e barbas ilimitados", "1 Day Groom por mês", "Manobrista grátis"]]] },
+  shop: [[P.kit, "Kit Barão", "Pomada, óleo e balm", 219], [P.pomada, "Pomada clay", "Acabamento natural", 79], [P.oleo, "Óleo de barba cedro", "50 ml", 69], [P.perfume, "Perfume de barba", "Notas amadeiradas", 149]],
+  reviews: [["Ambiente impecável e atendimento de alto nível. Vale cada centavo.", "Eduardo F."], ["O plano Ouro mudou minha rotina, passo lá toda semana.", "Rodrigo P."], ["Uso as três unidades e o padrão é igual em todas.", "Thiago N."]]
+},
+{
+  id: "flor", tier: "Simples", group: "Salão de beleza", tab: "Ateliê Flor de Lis", cls: "m-flor", hero: "split",
+  size: "Pequeno", pitch: "Versão enxuta para ateliê de unhas e sobrancelhas: serviços, fotos, equipe e agendamento.",
+  feats: ["Agendamento", "Portfólio", "Equipe", "Aberto agora"],
+  logo: "Flor de Lis", mark: "✿", domain: "ateliefloredelis.com.br",
+  eyebrow: "Ateliê de unhas e sobrancelhas",
+  title: "Unhas impecáveis, com calma e carinho.",
+  sub: "Atendimento com hora marcada, materiais esterilizados e um cafezinho enquanto a esmaltação seca.",
+  pics: [S.n1, S.n2, S.n3], meta: [["100%", "material esterilizado"], ["4,9 ★", "184 avaliações"], ["3", "manicures"]],
+  hours: { open: 9, close: 19, sat: 17, closed: [0, 1] }, slotMin: 60, wa: "5511900000000",
+  addr: "Rua Augusta, 1.508, sala 4 · Consolação · São Paulo/SP", insta: "@ateliefloredelis",
+  cats: {
+    "Unhas": [["Manicure", "Cutilagem e esmaltação", 45, 35], ["Pé e mão", "Completo", 90, 70], ["Esmaltação em gel", "Dura até 3 semanas", 60, 80], ["Alongamento em fibra", "Formato à sua escolha", 120, 180], ["Manutenção", "Alongamento ou gel", 90, 110]],
+    "Sobrancelhas": [["Design de sobrancelha", "Com pinça e linha", 30, 45], ["Brow lamination", "Fios alinhados por semanas", 60, 120]],
+    "Pés": [["Spa dos pés", "Esfoliação, hidratação e pedicure", 60, 75]]
+  },
+  team: [["Camila", "Nail art e alongamento", WOM[0]], ["Júlia", "Gel e esmaltação", WOM[1]], ["Marina", "Sobrancelhas", WOM[2]]],
+  gallery: [[S.n1, "Nail art delicada", "Unhas"], [S.n2, "Alongamento", "Unhas"], [S.n3, "Clássico atemporal", "Unhas"], [S.n4, "Cores da estação", "Unhas"], [S.h, "Sobrancelha", "Sobrancelhas"], [S.n5, "Francesinha", "Unhas"]],
+  loyalty: { title: "Cartão Flor", lead: "A cada 10 atendimentos, a 11ª manicure é por nossa conta. O cartão fica salvo no seu WhatsApp.", on: 7 },
+  shop: [[P.cuticula, "Óleo de cutícula", "Amêndoas, 15 ml", 24.9], [P.creme, "Creme para mãos", "Ureia 10%, 60 g", 39.9], [P.base, "Base fortalecedora", "Para unhas fracas", 29.9], [P.maos, "Kit spa das mãos", "Escova, sabonete e lixa", 19.9]],
+  reviews: [["A Camila tem mãos de fada. Meu alongamento durou um mês inteiro.", "Bianca R."], ["Ambiente limpinho e cheiroso, me sinto em casa.", "Larissa P."], ["Agendo tudo pelo site, sem precisar ficar mandando mensagem.", "Tatiane O."]]
+},
+{
+  id: "aurora", tier: "Completo", group: "Salão de beleza", tab: "Studio Aurora", cls: "m-aurora", hero: "overlay",
+  size: "Médio", pitch: "Studio de cabelo e cor com quiz de tratamento, cartão fidelidade e loja.",
+  feats: ["Agendamento", "Quiz de tratamento", "Fidelidade", "Loja"],
+  logo: "studio aurora", mark: "A", domain: "studioaurora.com.br",
+  eyebrow: "Coloração · Corte · Tratamento",
+  title: "Cor e corte para sair outra pessoa.",
+  sub: "Especialistas em loiros, morena iluminada e cachos. Faça o quiz e descubra o tratamento certo para o seu cabelo.",
+  heroImg: S.e, meta: [["+3 mil", "loiras atendidas"], ["4,8 ★", "620 avaliações"], ["6", "especialistas"]],
+  hours: { open: 9, close: 20, sat: 18, closed: [0] }, slotMin: 60, wa: "5511900000000",
+  addr: "Rua Haddock Lobo, 750 · Cerqueira César · São Paulo/SP", insta: "@studioaurora",
+  cats: {
+    "Corte e escova": [["Corte feminino", "Com lavagem e finalização", 60, 120], ["Escova modelada", "Lisa ou com movimento", 45, 70], ["Corte de cacheadas", "A seco, fio a fio", 75, 150]],
+    "Cor": [["Morena iluminada", "A partir de, conforme comprimento", 240, 450], ["Coloração", "Raiz ou global", 90, 220], ["Tonalização", "Corrige o tom amarelado", 45, 120]],
+    "Tratamento": [["Hidratação profunda", "Máscara e vapor de ozônio", 45, 110], ["Reconstrução", "Para fios danificados", 60, 150]],
+    "Eventos": [["Penteado", "Festa ou formatura", 60, 180], ["Maquiagem", "Social ou artística", 60, 200]]
+  },
+  team: [["Aurora Lins", "Fundadora · colorista", WOM[1]], ["Pietra", "Cachos e cortes", WOM[3]], ["Gabriel", "Loiros e mechas", MEN[3]], ["Lívia", "Make e penteados", WOM[2]]],
+  gallery: [[S.i, "Morena iluminada", "Cor"], [S.b, "Corte e finalização", "Corte"], [S.c, "Escova", "Corte"], [S.f, "Ritual de tratamento", "Tratamento"], [S.g, "Make social", "Eventos"], [S.d, "Nosso espaço", "Espaço"]],
+  quiz: true,
+  loyalty: { title: "Aurora Points", lead: "Cada serviço vira um selo. Com 10 selos você ganha uma hidratação profunda.", on: 4 },
+  shop: [[P.shampoo, "Shampoo roxo", "Desamarela loiros, 300 ml", 79], [P.mascara, "Máscara reconstrução", "250 g", 119], [P.oleocab, "Óleo finalizador", "Brilho sem pesar", 89], [P.leavein, "Leave-in térmico", "Protege até 230 °C", 69]],
+  reviews: [["Saí com o loiro dos sonhos e o cabelo ainda macio.", "Fernanda K."], ["O quiz acertou em cheio, a reconstrução salvou meu cabelo.", "Paula G."], ["Pietra é a melhor em cachos que já conheci.", "Joana M."]]
+},
+{
+  id: "maison", tier: "Premium", group: "Salão de beleza", tab: "Maison Lumière", cls: "m-maison", hero: "edit",
+  size: "Grande / rede", pitch: "Salão e spa completo com várias unidades, noivas, vale-presente e antes/depois.",
+  feats: ["Destaques tipo stories", "Várias unidades", "Vale-presente", "Antes e depois", "Loja"],
+  logo: "MAISON LUMIÈRE", mark: "ML", domain: "maisonlumiere.com.br",
+  eyebrow: "Salão & spa · São Paulo · Rio · BH",
+  title: "Beleza completa, do cabelo ao spa.",
+  sub: "Mais de 40 profissionais em três endereços. Cabelo, unhas, estética, spa e dia da noiva, tudo agendado online.",
+  strip: [S.a, S.g, S.c],
+  hours: { open: 8, close: 21, sat: 19, closed: [] }, slotMin: 30, wa: "5511900000000",
+  units: [["Itaim Bibi · SP", "Rua Joaquim Floriano, 466", S.a], ["Barra da Tijuca · RJ", "Av. das Américas, 3.500", S.d], ["Savassi · BH", "Rua Pernambuco, 1.200", S.j]],
+  addr: "Central de atendimento: (11) 4000-0000", insta: "@maisonlumiere",
+  cats: {
+    "Cabelo": [["Corte assinatura", "Com diagnóstico capilar", 60, 220], ["Mechas", "A partir de, conforme o comprimento", 240, 680], ["Tratamento Lumière", "Ritual de brilho em 5 etapas", 60, 260]],
+    "Unhas": [["Manicure e pedicure", "Com spa das mãos", 90, 120], ["Gel", "Com nail art inclusa", 75, 160]],
+    "Estética e spa": [["Limpeza de pele", "Com LED azul", 60, 290], ["Massagem relaxante", "60 minutos", 60, 320], ["Day spa", "Massagem, facial e banho de ofurô", 180, 790]],
+    "Noivas": [["Dia da noiva", "Cabelo, make, unhas e espumante", 300, 2400]]
+  },
+  team: [["Hélène Duarte", "Diretora criativa", WOM[2]], ["Rafaela Moura", "Colorista sênior", WOM[0]], ["Igor Tavares", "Hair stylist", MEN[2]], ["Carla Nunes", "Esteticista", WOM[1]]],
+  gallery: [[S.c, "Corte assinatura", "Cabelo"], [S.g, "Make noiva", "Noivas"], [S.n2, "Gel", "Unhas"], [S.f, "Spa capilar", "Spa"], [S.k, "Pele", "Spa"], [S.a, "Unidade Itaim", "Espaço"]],
+  beforeAfter: [S.b, S.i, "Do castanho ao iluminado em uma sessão com a Rafaela."],
+  gift: true,
+  shop: [[P.serum, "Sérum Lumière", "Brilho e proteção, 50 ml", 189], [P.mascara, "Máscara de ouro", "Tratamento noturno", 239], [P.shampoo2, "Shampoo sem sulfato", "300 ml", 129], [P.vela, "Vela aromática", "Nossa fragrância de spa", 99]],
+  reviews: [["Fiz meu dia da noiva aqui. Perfeito do começo ao fim.", "Mariana V."], ["O day spa é a melhor forma de passar um sábado.", "Cláudia B."], ["Atendimento igual em São Paulo e no Rio, impressionante.", "Renata S."]]
+}
+];
+
+/* ===== render ===== */
+const tabsEl = document.getElementById("tabs"), stage = document.getElementById("stage"), info = document.getElementById("info");
+const brandEl = document.getElementById("brand"), brandSub = document.getElementById("brand-sub"), swapBtn = document.getElementById("swap");
+/* cada cliente vê só o próprio segmento */
+const NICHES = {
+  barbearia: { group: "Barbearia", brand: "Modelos para barbearia", sub: "site com agendamento online" },
+  salao: { group: "Salão de beleza", brand: "Modelos para salão de beleza", sub: "site com agendamento online" }
+};
+let niche = null;
+const list = () => niche ? MODELS.filter(m => m.group === NICHES[niche].group) : [];
+function setNiche(n) {
+  niche = NICHES[n] ? n : null;
+  if (niche) { document.documentElement.dataset.niche = niche; store.set("vitrine-nicho", niche); }
+  else { delete document.documentElement.dataset.niche; store.set("vitrine-nicho", ""); }
+  brandEl.textContent = niche ? NICHES[niche].brand : "Modelos de site";
+  brandSub.textContent = niche ? NICHES[niche].sub : "com agendamento online";
+  swapBtn.hidden = !niche;
+  buildTabs();
+}
+function buildTabs() {
+  const ms = list();
+  tabsEl.hidden = !niche;
+  if (!niche) { tabsEl.innerHTML = ""; return; }
+  tabsEl.innerHTML = `<div class="v-group">${ms.map((m, i) => `<button class="v-tab" role="tab" data-id="${m.id}" aria-selected="false">${i + 1}. ${esc(m.tab)} <small style="opacity:.6">· ${esc(m.tier)}</small></button>`).join("")}</div>`
+    + `<div class="v-group"><button class="v-tab" role="tab" data-id="seguranca" aria-selected="false">O que vem no site</button></div>`;
+}
+tabsEl.addEventListener("click", e => { const b = e.target.closest(".v-tab"); if (b) show(b.dataset.id, true); });
+swapBtn.addEventListener("click", () => { setNiche(null); show("", true); });
+function pickerHTML() {
+  return `<div class="pick-wrap wrap">
+  <header><h1>Qual é o seu negócio?</h1><p>Escolha o seu segmento para ver os modelos de site pensados para ele, com agendamento online, fotos dos trabalhos e loja.</p></header>
+  <div class="picks">
+    <button class="pick b" data-n="barbearia" type="button"><img src="${IMG(B.a, 1200)}" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer"><div><h2>Barbearia</h2><p>Corte, barba e navalha. Do bairro ao premium.</p><span>Ver modelos →</span></div></button>
+    <button class="pick s" data-n="salao" type="button"><img src="${IMG(S.e, 1200)}" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer"><div><h2>Salão de beleza</h2><p>Cabelo, unhas, estética e spa. Do ateliê ao salão completo.</p><span>Ver modelos →</span></div></button>
+  </div></div>`;
+}
+stage.addEventListener("click", e => { const b = e.target.closest(".pick"); if (b) { setNiche(b.dataset.n); show(store.get("vitrine-tab-" + niche) || list()[0].id, true); } });
+
+function isOpen(h) {
+  const d = new Date(), day = d.getDay(), hr = d.getHours() + d.getMinutes() / 60;
+  if (h.closed.includes(day)) return [false, "Fechado hoje"];
+  const close = day === 6 ? h.sat : h.close;
+  if (hr >= h.open && hr < close) return [true, `Aberto agora · fecha às ${close}h`];
+  return [false, hr < h.open ? `Abre hoje às ${h.open}h` : "Fechado · abre amanhã"];
+}
+
+function heroHTML(m) {
+  const ctas = `<div class="h-ctas"><button class="s-btn" data-go="agendar">Agendar horário</button><button class="s-btn ghost" data-go="servicos">Ver serviços e preços</button></div>`;
+  const meta = m.meta ? `<div class="h-meta">${m.meta.map(([a, b]) => `<div><b>${esc(a)}</b>${esc(b)}</div>`).join("")}</div>` : "";
+  const head = `<p class="s-eyebrow">${esc(m.eyebrow)}</p><h1 class="h-title">${esc(m.title)}</h1>`;
+  if (m.hero === "overlay") return `<section class="s-hero h-overlay">${ph(m.heroImg, m.title, "", 1800)}<div class="s-in">${head}<p class="h-sub">${esc(m.sub)}</p>${ctas}${meta}</div></section>`;
+  if (m.hero === "split") return `<section class="s-hero h-split"><div class="s-in"><div>${head}<p class="h-sub">${esc(m.sub)}</p>${ctas}${meta}</div><div class="pics">${m.pics.map((p, i) => ph(p, m.gallery[i] ? m.gallery[i][1] : m.title, "", i ? 600 : 1000)).join("")}</div></div></section>`;
+  const mq = m.marquee ? `<div class="marquee" aria-hidden="true"><div>${[...m.marquee, ...m.marquee, ...m.marquee, ...m.marquee].map(t => `<span>${esc(t)} ✦</span>`).join("")}</div></div>` : "";
+  return `<section class="s-hero h-edit"><div class="s-in"><p class="s-eyebrow">${esc(m.eyebrow)}</p><div class="row"><h1 class="h-title">${esc(m.title)}</h1><div><p class="h-sub">${esc(m.sub)}</p>${ctas}</div></div><div class="strip">${m.strip.map((p, i) => ph(p, m.gallery[i][1], "", i ? 700 : 1200)).join("")}</div></div></section><div style="height:56px"></div>${mq}`;
+}
+
+function siteHTML(m) {
+  const full = m.tier !== "Simples";
+  const [open, label] = isOpen(m.hours);
+  const nav = [["servicos", "Serviços"], ["trabalhos", "Trabalhos"], ["equipe", "Equipe"], m.units ? ["unidades", "Unidades"] : null, m.tier !== "Simples" ? ["loja", "Loja"] : null, ["agendar", "Agendar"]].filter(Boolean);
+  const cats = Object.keys(m.cats);
+  const svc = cats.map(c => m.cats[c].map(([n, d, min, p]) => `<div class="svc" data-cat="${esc(c)}"><div class="meta"><h4>${esc(n)}</h4><p>${esc(d)} · ${min} min</p></div><div class="pr">${d.startsWith("A partir") ? "<small>a partir de</small>" : ""}${brl(p)}</div><button class="s-btn sm ghost go" data-pick="${esc(n)}">Agendar</button></div>`).join("")).join("");
+  const galCats = [...new Set(m.gallery.map(g => g[2]))];
+  let h = `<header class="s-nav"><div class="s-in"><a class="s-logo" href="#" data-go="top"><span class="mk" aria-hidden="true">${esc(m.mark)}</span>${esc(m.logo)}</a><nav class="s-links" aria-label="Menu do site">${nav.map(([k, t]) => `<button data-go="${k}">${t}</button>`).join("")}</nav><span class="s-open ${open ? "" : "closed"}"><i></i>${esc(label)}</span><button class="s-btn sm" data-go="agendar">Agendar</button><button class="s-menu" type="button" aria-label="Abrir menu" aria-expanded="false" data-menu>☰</button></div></header>`;
+  if (m.tier === "Premium") h += `<div class="s-in"><div class="stories" aria-label="Destaques">${m.gallery.map(([id, t], i) => `<button class="story" type="button" data-story="${i}"><span class="ring">${ph(id, t, "", 200)}</span>${esc(t.split(" ")[0])}</button>`).join("")}</div></div>`;
+  h += heroHTML(m);
+  h += `<section class="s-sec" data-sec="servicos"><div class="s-in"><div class="s-head"><div><p class="s-eyebrow">Serviços e preços</p><h2 class="s-h2">Escolha o que você precisa</h2></div><p class="s-lead">Preços fixos, sem surpresa no caixa. Toque em Agendar e o serviço já vai preenchido.</p></div><div class="svc-tabs" role="group" aria-label="Categorias"><button class="chip" aria-pressed="true" data-cat="*">Todos</button>${cats.map(c => `<button class="chip" aria-pressed="false" data-cat="${esc(c)}">${esc(c)}</button>`).join("")}</div><div class="svc-list">${svc}</div></div></section>`;
+  h += `<section class="s-sec alt" data-sec="trabalhos"><div class="s-in"><div class="s-head"><div><p class="s-eyebrow">Portfólio</p><h2 class="s-h2">Trabalhos reais da casa</h2></div><div class="svc-tabs" role="group" aria-label="Filtrar trabalhos" data-gal><button class="chip" aria-pressed="true" data-cat="*">Todos</button>${galCats.map(c => `<button class="chip" aria-pressed="false" data-cat="${esc(c)}">${esc(c)}</button>`).join("")}</div></div><div class="gal">${m.gallery.map(([id, t, c], i) => ph(id, t, "", i === 0 ? 1100 : 700, t).replace('<figure class="ph ', `<figure data-cat="${esc(c)}" class="ph `)).join("")}</div></div></section>`;
+  if (m.beforeAfter) h += `<section class="s-sec" data-sec="antes"><div class="s-in ba-wrap"><div><p class="s-eyebrow">Antes e depois</p><h2 class="s-h2">Arraste e veja a diferença</h2><p class="s-lead">${esc(m.beforeAfter[2])}</p></div><div class="ba">${ph(m.beforeAfter[0], "Antes")}${ph(m.beforeAfter[1], "Depois", "after")}<span class="lb" style="left:12px">Antes</span><span class="lb" style="right:12px">Depois</span><span class="line"></span><input type="range" min="0" max="100" value="50" aria-label="Comparar antes e depois" id="ba-${m.id}"></div></div></section>`;
+  h += `<section class="s-sec ${m.beforeAfter ? "alt" : ""}" data-sec="equipe"><div class="s-in"><div class="s-head"><div><p class="s-eyebrow">Equipe</p><h2 class="s-h2">Quem vai cuidar de você</h2></div></div><div class="team">${m.team.map(([n, r, img]) => `<div class="pro">${ph(img, n, "", 600)}<h4>${esc(n)}</h4><p>${esc(r)}</p><button class="s-btn sm ghost" data-pro="${esc(n)}">Agendar com ${esc(n.split(" ")[0])}</button></div>`).join("")}</div></div></section>`;
+  if (m.units) h += `<section class="s-sec alt" data-sec="unidades"><div class="s-in"><div class="s-head"><div><p class="s-eyebrow">Unidades</p><h2 class="s-h2">Mais perto de você</h2></div><p class="s-lead">Mesmo padrão em todas as casas. Seu plano e seus selos valem em qualquer unidade.</p></div><div class="units">${m.units.map(([n, a, img]) => `<div class="unit">${ph(img, n, "", 700)}<div class="t"><b>${esc(n)}</b><p>${esc(a)}</p><button class="s-btn sm ghost" data-unit="${esc(n)}" style="justify-self:start;margin-top:8px">Agendar nesta unidade</button></div></div>`).join("")}</div></div></section>`;
+  if (m.quiz && full) h += `<section class="s-sec" data-sec="quiz"><div class="s-in loyal"><div><p class="s-eyebrow">Diagnóstico rápido</p><h2 class="s-h2">Qual tratamento o seu cabelo pede?</h2><p class="s-lead">Três perguntas e a gente indica o serviço. Dá para agendar direto daqui.</p></div><div class="quiz" id="quiz-${m.id}"><div><b>1. Seu cabelo tem química?</b><div class="q" data-q="0"><button class="chip" aria-pressed="false" data-v="1">Sim, descolorido</button><button class="chip" aria-pressed="false" data-v="0">Não ou só tinta</button></div></div><div><b>2. Como ele está?</b><div class="q" data-q="1"><button class="chip" aria-pressed="false" data-v="1">Quebrando / elástico</button><button class="chip" aria-pressed="false" data-v="0">Seco e sem brilho</button></div></div><div><b>3. O que você quer?</b><div class="q" data-q="2"><button class="chip" aria-pressed="false" data-v="1">Mudar a cor</button><button class="chip" aria-pressed="false" data-v="0">Só recuperar</button></div></div><div class="res" aria-live="polite"><span class="note">Responda as três perguntas para ver a indicação.</span></div></div></div></section>`;
+  if (m.plans && full) h += `<section class="s-sec ${m.units ? "" : "alt"}" data-sec="planos"><div class="s-in"><div class="s-head"><div><p class="s-eyebrow">Assinatura</p><h2 class="s-h2">${esc(m.plans.title)}</h2></div><p class="s-lead">${esc(m.plans.lead)}</p></div><div class="plans">${m.plans.items.map(([n, p, l, hot]) => `<div class="plan ${hot ? "hot" : ""}"><h4>${esc(n)}${hot ? " · mais escolhido" : ""}</h4><div class="big">${brl(p).replace(",00", "")}<small> /mês</small></div><ul>${l.map(x => `<li>${esc(x)}</li>`).join("")}</ul><button class="s-btn ${hot ? "" : "ghost"}" data-plan="${esc(n)}">Quero assinar</button></div>`).join("")}</div></div></section>`;
+  if (m.loyalty && full) h += `<section class="s-sec alt" data-sec="fidelidade"><div class="s-in loyal"><div><p class="s-eyebrow">Fidelidade</p><h2 class="s-h2">${esc(m.loyalty.title)}</h2><p class="s-lead">${esc(m.loyalty.lead)}</p></div><div class="card-stamps"><b>Exemplo de cartão</b><span class="note"> · ${m.loyalty.on} de 10 selos</span><div class="stamps">${Array.from({ length: 10 }, (_, i) => `<div class="stamp ${i < m.loyalty.on ? "on" : ""}">${i < m.loyalty.on ? "✓" : i + 1}</div>`).join("")}</div><span class="note">Faltam ${10 - m.loyalty.on} atendimentos para o prêmio.</span></div></div></section>`;
+  if (m.gift) h += `<section class="s-sec alt" data-sec="presente"><div class="s-in gift"><div class="gift-card"><span>MAISON LUMIÈRE · VALE-PRESENTE</span><div><div class="v" id="gv-${m.id}">${brl(300).replace(",00", "")}</div><span>Válido por 12 meses em qualquer unidade</span></div></div><div><p class="s-eyebrow">Vale-presente</p><h2 class="s-h2">Dê um dia de spa de presente</h2><p class="s-lead">Escolha o valor e mande o pedido pelo WhatsApp. O vale chega em PDF para você encaminhar.</p><div class="svc-tabs" role="group" aria-label="Valor do vale" style="margin-top:18px" id="gift-${m.id}">${[150, 300, 500, 800].map((v, i) => `<button class="chip" aria-pressed="${i === 1}" data-v="${v}">${brl(v).replace(",00", "")}</button>`).join("")}</div><button class="s-btn" data-giftbuy>Comprar vale-presente</button></div></div></section>`;
+  if (full) h += `<section class="s-sec" data-sec="loja"><div class="s-in"><div class="s-head"><div><p class="s-eyebrow">Loja</p><h2 class="s-h2">Leve o cuidado para casa</h2></div><p class="s-lead">Separe os produtos e retire no dia do seu horário, ou peça entrega pelo WhatsApp.</p></div><div class="shop">${m.shop.map(([img, n, d, p], i) => `<div class="prod">${ph(img, n, "", 500)}<h4>${esc(n)}</h4><p>${esc(d)}</p><div class="row"><span class="price">${brl(p)}</span><button class="s-btn sm" data-add="${i}">Adicionar</button></div></div>`).join("")}</div><div class="cart" id="cart-${m.id}"><span class="sum">Sacola vazia</span><button class="s-btn sm" data-checkout disabled>Finalizar pelo WhatsApp</button></div></div></section>`;
+  h += `<section class="s-sec alt" data-sec="avaliacoes"><div class="s-in"><div class="s-head"><div><p class="s-eyebrow">Avaliações</p><h2 class="s-h2">Quem já veio, volta</h2></div></div><div class="revs">${m.reviews.map(([t, a]) => `<div class="rev"><span class="st" aria-label="5 estrelas">★★★★★</span><p>“${esc(t)}”</p><small>${esc(a)} · Google</small></div>`).join("")}</div></div></section>`;
+  h += bookingHTML(m);
+  h += `<footer class="s-foot"><div class="s-in"><div><h5>${esc(m.logo)}</h5><p>${esc(m.addr)}</p><p>${esc(m.insta)}</p></div><div><h5>Horários</h5><p>Seg a sex: ${m.hours.open}h às ${m.hours.close}h</p><p>Sábado: ${m.hours.open}h às ${m.hours.sat}h</p><p>${m.hours.closed.length ? "Fechado: " + m.hours.closed.map(d => ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"][d]).join(" e ") : "Aberto todos os dias"}</p></div><div><h5>Privacidade</h5><p>Seus dados são usados só para confirmar o horário (LGPD).</p><p>Site com HTTPS e sem cookies de rastreamento.</p></div></div></footer>`;
+  h += `<div class="s-mbar"><button class="s-btn" data-go="agendar">Agendar horário</button><button class="wa-fab" data-go="agendar" aria-label="Agendar pelo WhatsApp">WhatsApp</button></div>`;
+  return `<div class="site ${m.cls}" id="site-${m.id}">${h}</div>`;
+}
+
+function bookingHTML(m) {
+  const all = Object.values(m.cats).flat();
+  const unit = m.units ? `<div class="fld"><label for="bk-unit-${m.id}">Unidade</label><select id="bk-unit-${m.id}" name="unit">${m.units.map(u => `<option>${esc(u[0])}</option>`).join("")}</select></div>` : "";
+  return `<section class="s-sec" data-sec="agendar"><div class="s-in"><div class="s-head"><div><p class="s-eyebrow">Agendamento online</p><h2 class="s-h2">Vamos marcar seu horário?</h2></div><p class="s-lead">Escolha o serviço, o profissional e o horário. A confirmação sai pronta para o WhatsApp da casa.</p></div>
+  <form class="book" id="bk-${m.id}" novalidate autocomplete="on">
+    <div>
+      <div class="bk-step"><h4><i>1</i>Serviço${m.units ? " e unidade" : ""}</h4>${unit}<div class="fld"><label for="bk-svc-${m.id}">Serviço</label><select id="bk-svc-${m.id}" name="svc" required><option value="">Escolha um serviço</option>${all.map(([n, , min, p]) => `<option value="${esc(n)}">${esc(n)} · ${min} min · ${brl(p)}</option>`).join("")}</select><span class="err" data-err="svc"></span></div></div>
+      <div class="bk-step"><h4><i>2</i>Profissional, dia e horário</h4><div class="pros" role="group" aria-label="Profissional"><button type="button" class="chip" aria-pressed="true" data-p="Qualquer profissional">Qualquer profissional</button>${m.team.map(t => `<button type="button" class="chip" aria-pressed="false" data-p="${esc(t[0])}">${esc(t[0])}</button>`).join("")}</div><div class="days" role="group" aria-label="Dia"></div><div class="slots" role="group" aria-label="Horário"></div><span class="err" data-err="slot"></span></div>
+      <div class="bk-step"><h4><i>3</i>Seus dados</h4><div class="two"><div class="fld"><label for="bk-name-${m.id}">Nome</label><input id="bk-name-${m.id}" name="name" autocomplete="name" maxlength="60" required placeholder="Seu nome"><span class="err" data-err="name"></span></div><div class="fld"><label for="bk-tel-${m.id}">WhatsApp</label><input id="bk-tel-${m.id}" name="tel" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="15" required placeholder="(11) 91234-5678"><span class="err" data-err="tel"></span></div></div><div class="fld"><label for="bk-obs-${m.id}">Observações (opcional)</label><textarea id="bk-obs-${m.id}" name="obs" maxlength="280" placeholder="Ex.: quero manter o comprimento"></textarea></div><div class="hp" aria-hidden="true"><label for="bk-web-${m.id}">Site</label><input id="bk-web-${m.id}" name="website" tabindex="-1" autocomplete="off"></div><label class="consent"><input type="checkbox" id="bk-ok-${m.id}" name="ok" required><span>Autorizo o uso do meu nome e WhatsApp só para confirmar este horário.</span></label><span class="err" data-err="ok" style="font-size:12px;color:#e0563f"></span></div>
+    </div>
+    <aside class="summary" aria-live="polite"><h4>Resumo</h4><dl class="sumdl"></dl><div class="tot"><span>Total estimado</span><span class="sumtot">${brl(0)}</span></div><button class="s-btn" type="submit">Revisar e confirmar</button><div class="okarea"></div><span class="note">Pagamento no local: Pix, cartão ou dinheiro.</span></aside>
+  </form></div></section>`;
+}
+
+/* ===== comportamento de cada site ===== */
+function hash(s) { let h = 2166136261; for (const c of s) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
+
+function wire(m) {
+  const root = document.getElementById("site-" + m.id);
+  const all = Object.values(m.cats).flat();
+  const st = { svc: "", pro: "Qualquer profissional", day: null, slot: "", unit: m.units ? m.units[0][0] : "", cart: [], plan: "", lastSend: 0 };
+  const f = root.querySelector("form.book");
+  const $ = s => root.querySelector(s);
+
+  // fotos que não carregam viram um bloco desenhado
+  root.querySelectorAll(".ph img").forEach(img => {
+    const fail = () => img.parentElement.classList.add("noimg");
+    if (img.complete && img.naturalWidth === 0) fail(); else img.addEventListener("error", fail, { once: true });
+  });
+
+  const go = key => {
+    const t = key === "top" ? root : root.querySelector(`[data-sec="${key}"]`);
+    if (t) t.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  };
+
+  // filtros
+  const filter = (group, sel) => group.addEventListener("click", e => {
+    const b = e.target.closest(".chip"); if (!b) return;
+    group.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c === b));
+    root.querySelectorAll(sel).forEach(el => el.hidden = !(b.dataset.cat === "*" || el.dataset.cat === b.dataset.cat));
+  });
+  filter(root.querySelector('[data-sec="servicos"] .svc-tabs'), ".svc");
+  filter(root.querySelector("[data-gal]"), ".gal .ph");
+
+  // antes e depois
+  const ba = root.querySelector(".ba input");
+  if (ba) ba.addEventListener("input", () => ba.parentElement.style.setProperty("--cut", ba.value + "%"));
+
+  // dias
+  const daysEl = $(".days"), slotsEl = $(".slots");
+  const days = []; const d0 = new Date(); d0.setHours(0, 0, 0, 0);
+  for (let i = 0; days.length < 12 && i < 30; i++) { const d = new Date(d0); d.setDate(d0.getDate() + i); if (!m.hours.closed.includes(d.getDay())) days.push(d); }
+  const wd = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+  daysEl.innerHTML = days.map((d, i) => `<button type="button" class="day" aria-pressed="false" data-i="${i}"><small>${i === 0 && d.getTime() === d0.getTime() ? "hoje" : wd[d.getDay()]}</small><b>${d.getDate()}</b><small>${d.toLocaleDateString("pt-BR", { month: "short" }).replace(".", "")}</small></button>`).join("");
+  function renderSlots() {
+    if (!st.day) { slotsEl.innerHTML = `<span class="note" style="grid-column:1/-1">Escolha um dia para ver os horários livres.</span>`; return; }
+    const d = st.day, close = d.getDay() === 6 ? m.hours.sat : m.hours.close, now = new Date();
+    let out = "";
+    for (let t = m.hours.open * 60; t + m.slotMin <= close * 60; t += m.slotMin) {
+      const hh = String(Math.floor(t / 60)).padStart(2, "0") + ":" + String(t % 60).padStart(2, "0");
+      const dt = new Date(d); dt.setHours(0, t, 0, 0);
+      const busy = hash(m.id + d.toDateString() + st.pro + hh) % 10 < 3 || dt <= now;
+      out += `<button type="button" class="slot" aria-pressed="${st.slot === hh}" ${busy ? "disabled" : ""} data-t="${hh}">${hh}</button>`;
+    }
+    slotsEl.innerHTML = out || `<span class="note">Sem horários livres neste dia.</span>`;
+  }
+  daysEl.addEventListener("click", e => { const b = e.target.closest(".day"); if (!b) return; st.day = days[+b.dataset.i]; st.slot = ""; daysEl.querySelectorAll(".day").forEach(x => x.setAttribute("aria-pressed", x === b)); renderSlots(); summary(); });
+  slotsEl.addEventListener("click", e => { const b = e.target.closest(".slot"); if (!b || b.disabled) return; st.slot = b.dataset.t; slotsEl.querySelectorAll(".slot").forEach(x => x.setAttribute("aria-pressed", x === b)); summary(); });
+  const prosEl = $(".pros");
+  const setPro = name => { st.pro = name; st.slot = ""; prosEl.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.dataset.p === name)); renderSlots(); summary(); };
+  prosEl.addEventListener("click", e => { const b = e.target.closest(".chip"); if (b) setPro(b.dataset.p); });
+
+  const svcSel = f.elements.svc;
+  svcSel.addEventListener("change", () => { st.svc = svcSel.value; summary(); });
+  if (f.elements.unit) f.elements.unit.addEventListener("change", () => { st.unit = f.elements.unit.value; summary(); });
+
+  // máscara de telefone (só números, formato brasileiro)
+  const tel = f.elements.tel;
+  tel.addEventListener("input", () => {
+    const v = tel.value.replace(/\D/g, "").slice(0, 11);
+    tel.value = v.length > 6 ? `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7)}` : v.length > 2 ? `(${v.slice(0, 2)}) ${v.slice(2)}` : v;
+  });
+
+  // loja
+  const cartEl = $("#cart-" + m.id);
+  function renderCart() {
+    if (!cartEl) { summary(); return; }
+    const n = st.cart.length, tot = st.cart.reduce((a, i) => a + m.shop[i][3], 0);
+    cartEl.querySelector(".sum").innerHTML = n ? `<b>${n} ${n > 1 ? "itens" : "item"}</b> · ${brl(tot)} <button type="button" class="s-btn sm ghost" data-clear style="margin-left:8px">Esvaziar</button>` : "Sacola vazia";
+    cartEl.querySelector("[data-checkout]").disabled = !n;
+    summary();
+  }
+
+  function summary() {
+    const s = all.find(x => x[0] === st.svc);
+    const prodTot = st.cart.reduce((a, i) => a + m.shop[i][3], 0);
+    const rows = [m.units ? ["Unidade", st.unit] : null, ["Serviço", s ? s[0] : "—"], ["Profissional", st.pro], ["Dia", st.day ? st.day.toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "2-digit" }) : "—"], ["Horário", st.slot || "—"], st.cart.length ? ["Produtos", `${st.cart.length} na sacola · ${brl(prodTot)}`] : null, st.plan ? ["Interesse", "Plano " + st.plan] : null].filter(Boolean);
+    const dl = $(".sumdl"); dl.textContent = "";
+    rows.forEach(([k, v]) => { const dt = document.createElement("dt"), dd = document.createElement("dd"); dt.textContent = k; dd.textContent = v; dl.append(dt, dd); });
+    $(".sumtot").textContent = brl((s ? s[3] : 0) + prodTot);
+  }
+
+  function waBox(title, msg) {
+    const area = $(".okarea"); area.textContent = "";
+    const box = document.createElement("div"); box.className = "ok-box";
+    const h = document.createElement("b"); h.textContent = title;
+    const pre = document.createElement("pre"); pre.textContent = msg;
+    const link = document.createElement("a"); link.className = "s-btn"; link.target = "_blank"; link.rel = "noopener noreferrer";
+    link.href = `https://wa.me/${m.wa}?text=${encodeURIComponent(msg)}`; link.textContent = "Enviar no WhatsApp";
+    const copy = document.createElement("button"); copy.type = "button"; copy.className = "s-btn ghost sm"; copy.textContent = "Copiar mensagem";
+    copy.addEventListener("click", () => {
+      const done = () => { copy.textContent = "Mensagem copiada"; };
+      if (navigator.clipboard) navigator.clipboard.writeText(msg).then(done, () => { const r = document.createRange(); r.selectNodeContents(pre); getSelection().removeAllRanges(); getSelection().addRange(r); });
+    });
+    const num = document.createElement("span"); num.className = "num"; num.textContent = `WhatsApp da casa: +${m.wa} (exemplo, troque pelo número real)`;
+    box.append(h, pre, link, copy, num); area.append(box);
+    $(".summary").scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  const setErr = (k, t) => { const e = f.querySelector(`[data-err="${k}"]`); if (e) e.textContent = t; const inp = f.elements[k]; if (inp && inp.setAttribute) inp.setAttribute("aria-invalid", t ? "true" : "false"); };
+
+  f.addEventListener("submit", e => {
+    e.preventDefault();
+    if (f.elements.website.value) return; // robô preencheu o campo escondido
+    if (Date.now() - st.lastSend < 4000) return; // evita clique repetido
+    const name = f.elements.name.value.replace(/[<>{}\[\]\\]/g, "").replace(/\s+/g, " ").trim();
+    const digits = tel.value.replace(/\D/g, "");
+    let ok = true;
+    setErr("svc", st.svc ? "" : (ok = false, "Escolha um serviço."));
+    setErr("slot", st.day && st.slot ? "" : (ok = false, "Escolha o dia e o horário."));
+    setErr("name", /^[A-Za-zÀ-ÿ' .-]{2,60}$/.test(name) ? "" : (ok = false, "Digite seu nome (só letras)."));
+    setErr("tel", /^[1-9]{2}9\d{8}$/.test(digits) ? "" : (ok = false, "Digite um celular com DDD, ex.: (11) 91234-5678."));
+    setErr("ok", f.elements.ok.checked ? "" : (ok = false, "Marque a autorização para continuar."));
+    if (!ok) { const first = f.querySelector('[aria-invalid="true"]') || f.querySelector(".err:not(:empty)"); if (first) first.scrollIntoView({ block: "center", behavior: "smooth" }); return; }
+    st.lastSend = Date.now();
+    const s = all.find(x => x[0] === st.svc);
+    const obs = f.elements.obs.value.replace(/[<>]/g, "").trim().slice(0, 280);
+    const lines = [`Olá, ${m.logo}! Quero confirmar um horário:`, "", m.units ? `Unidade: ${st.unit}` : null, `Serviço: ${s[0]} (${brl(s[3])})`, `Profissional: ${st.pro}`, `Dia: ${st.day.toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "2-digit" })} às ${st.slot}`, st.cart.length ? `Separar produtos: ${st.cart.map(i => m.shop[i][1]).join(", ")}` : null, st.plan ? `Tenho interesse no plano ${st.plan}` : null, obs ? `Obs.: ${obs}` : null, "", `Nome: ${name}`, `WhatsApp: ${tel.value}`].filter(x => x !== null);
+    waBox("Pronto! Falta só enviar", lines.join("\n"));
+  });
+
+  // cliques gerais do site
+  root.addEventListener("click", e => {
+    const mb = e.target.closest("[data-menu]");
+    if (mb) { const l = root.querySelector(".s-links"), o = !l.classList.contains("open"); l.classList.toggle("open", o); mb.setAttribute("aria-expanded", o); mb.textContent = o ? "✕" : "☰"; return; }
+    if (e.target.closest(".s-links button")) { root.querySelector(".s-links").classList.remove("open"); const b = root.querySelector("[data-menu]"); b.textContent = "☰"; b.setAttribute("aria-expanded", "false"); }
+    const st0 = e.target.closest("[data-story]");
+    if (st0) { viewer(m, m.gallery, +st0.dataset.story, true); return; }
+    const gf = e.target.closest(".gal .ph");
+    if (gf) { const vis = [...root.querySelectorAll(".gal .ph:not([hidden])")]; const items = vis.map(f => m.gallery[[...root.querySelectorAll(".gal .ph")].indexOf(f)]); viewer(m, items, vis.indexOf(gf), false); return; }
+    const t = e.target.closest("[data-go],[data-pick],[data-pro],[data-unit],[data-plan],[data-add],[data-clear],[data-checkout],[data-giftbuy]");
+    if (!t) return;
+    if (t.dataset.go) { e.preventDefault(); go(t.dataset.go); }
+    if (t.dataset.pick) { svcSel.value = t.dataset.pick; st.svc = t.dataset.pick; summary(); go("agendar"); }
+    if (t.dataset.pro) { setPro(t.dataset.pro); go("agendar"); }
+    if (t.dataset.unit) { f.elements.unit.value = t.dataset.unit; st.unit = t.dataset.unit; summary(); go("agendar"); }
+    if (t.dataset.plan) { st.plan = t.dataset.plan; summary(); go("agendar"); }
+    if (t.dataset.add !== undefined) { st.cart.push(+t.dataset.add); t.textContent = "Adicionado ✓"; setTimeout(() => t.textContent = "Adicionar", 1200); renderCart(); }
+    if (t.hasAttribute("data-clear")) { st.cart = []; renderCart(); }
+    if (t.hasAttribute("data-checkout")) { const tot = st.cart.reduce((a, i) => a + m.shop[i][3], 0); waBox("Pedido da loja", `Olá, ${m.logo}! Quero comprar:\n\n${st.cart.map(i => `• ${m.shop[i][1]} (${brl(m.shop[i][3])})`).join("\n")}\n\nTotal: ${brl(tot)}\nPrefiro: retirar no salão / receber em casa`); }
+    if (t.hasAttribute("data-giftbuy")) { const v = root.querySelector(`#gift-${m.id} [aria-pressed="true"]`).dataset.v; waBox("Pedido de vale-presente", `Olá, ${m.logo}! Quero um vale-presente de ${brl(+v)}.\nNome de quem vai receber: \nMensagem no cartão: `); }
+  });
+
+  const giftEl = root.querySelector(`#gift-${m.id}`);
+  if (giftEl) giftEl.addEventListener("click", e => { const b = e.target.closest(".chip"); if (!b) return; giftEl.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c === b)); root.querySelector(`#gv-${m.id}`).textContent = brl(+b.dataset.v).replace(",00", ""); });
+
+  // quiz
+  const quiz = root.querySelector(`#quiz-${m.id}`);
+  if (quiz) {
+    const ans = [null, null, null];
+    quiz.addEventListener("click", e => {
+      const b = e.target.closest(".chip"); if (!b) return;
+      const q = b.parentElement; ans[+q.dataset.q] = +b.dataset.v;
+      q.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c === b));
+      if (ans.includes(null)) return;
+      const pick = ans[1] ? "Reconstrução" : ans[2] ? (ans[0] ? "Tonalização" : "Morena iluminada") : "Hidratação profunda";
+      const why = { "Reconstrução": "Fio elástico ou quebrando pede reposição de massa antes de qualquer cor.", "Tonalização": "Cabelo já descolorido: o tonalizante muda o tom sem agredir.", "Morena iluminada": "Cabelo saudável e sem descoloração: dá para iluminar com segurança.", "Hidratação profunda": "Seco e sem brilho resolve com água e nutrição." }[pick];
+      const res = quiz.querySelector(".res"); res.textContent = "";
+      const b1 = document.createElement("b"); b1.textContent = "Indicação: " + pick;
+      const p = document.createElement("p"); p.textContent = why; p.style.margin = "4px 0 10px"; p.className = "note";
+      const btn = document.createElement("button"); btn.className = "s-btn sm"; btn.dataset.pick = pick; btn.textContent = "Agendar " + pick;
+      res.append(b1, p, btn);
+    });
+  }
+
+  renderSlots(); renderCart(); summary();
+}
+
+/* ===== visualizador de fotos e stories ===== */
+function viewer(m, items, start, auto) {
+  let i = start, timer = null;
+  const ov = document.createElement("div"); ov.className = "lb-ov"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-modal", "true"); ov.setAttribute("aria-label", "Fotos");
+  const draw = () => {
+    clearTimeout(timer);
+    const [id, t] = items[i];
+    ov.innerHTML = `<div class="bars">${items.map((_, k) => `<i class="${k < i ? "done" : k === i && auto ? "run" : k === i ? "done" : ""}"><b></b></i>`).join("")}</div><div class="stage">${ph(id, t, "", 1400)}<div class="nav"><button type="button" aria-label="Foto anterior" data-d="-1"></button><button type="button" aria-label="Próxima foto" data-d="1"></button></div></div><div class="foot"><span>${esc(t)} · ${i + 1}/${items.length}</span><button class="x" type="button" data-x>Fechar</button></div>`;
+    ov.querySelectorAll(".ph img").forEach(img => img.addEventListener("error", () => img.parentElement.classList.add("noimg"), { once: true }));
+    if (auto) timer = setTimeout(() => step(1), 4000);
+  };
+  const close = () => { clearTimeout(timer); ov.remove(); document.removeEventListener("keydown", key); };
+  const step = d => { i += d; if (i < 0) i = 0; if (i >= items.length) return close(); draw(); };
+  const key = e => { if (e.key === "Escape") close(); if (e.key === "ArrowRight") step(1); if (e.key === "ArrowLeft") step(-1); };
+  ov.addEventListener("click", e => { if (e.target.closest("[data-x]")) return close(); const b = e.target.closest("[data-d]"); if (b) step(+b.dataset.d); });
+  document.addEventListener("keydown", key);
+  document.body.append(ov); draw(); ov.querySelector("[data-x]").focus();
+}
+
+/* ===== página de segurança e extras ===== */
+function securityHTML() {
+  const extras = niche === "barbearia"
+    ? ["Clube de assinatura mensal para o cliente cortar quantas vezes quiser", "Antes e depois de arrastar (Barão Club)", "Escolha do barbeiro na hora de agendar"]
+    : ["Cartão fidelidade com selos (Ateliê Flor de Lis e Studio Aurora)", "Quiz que indica o tratamento certo (Studio Aurora)", "Antes e depois de arrastar e vale-presente (Maison Lumière)"];
+  return `<div class="sec wrap">
+  <div class="sec-grid">
+    <div class="sec-card"><h3>Versões</h3><ul>
+      <li><b>Simples</b> <span>· serviços e preços, fotos, equipe e agendamento pelo WhatsApp. Ideal para começar.</span></li>
+      <li><b>Completo</b> <span>· tudo do Simples, mais loja, ${niche === "barbearia" ? "assinatura" : "fidelidade"} e avaliações.</span></li>
+      <li><b>Premium</b> <span>· tudo do Completo, mais destaques tipo stories, várias unidades e antes e depois.</span></li>
+    </ul></div>
+    <div class="sec-card"><h3>Já vem no site</h3><ul>
+      <li>Agendamento online em menos de um minuto, direto no celular</li>
+      <li>Selo <b>Aberto agora</b> que muda sozinho pelo horário</li>
+      <li>Horários ocupados aparecem riscados</li>
+      ${extras.map(x => `<li>${esc(x)}</li>`).join("")}
+      <li>Loja com sacola que vai junto no agendamento</li>
+      <li>Botão de WhatsApp sempre à mão</li>
+    </ul></div>
+    <div class="sec-card"><h3>Segurança</h3><ul>
+      <li>Site com HTTPS e domínio próprio .com.br</li>
+      <li>Dados do cliente protegidos e consentimento LGPD antes de enviar</li>
+      <li>Proteção contra robôs e envios repetidos</li>
+      <li>Sem cookies de rastreamento</li>
+    </ul></div>
+    <div class="sec-card"><h3>Pode incluir também</h3><ul>
+      <li>Painel do dono com login seguro para ver e bloquear horários</li>
+      <li>Agenda real sem conflito <span>(Google Agenda)</span></li>
+      <li>Lembrete automático no WhatsApp 1 dia antes</li>
+      <li>Site instalável no celular como app</li>
+      <li>Pagamento de sinal por Pix para reduzir falta</li>
+      <li>Link "Avaliar no Google" depois do atendimento</li>
+      <li>Botão de rota no Google Maps e Waze</li>
+    </ul></div>
+  </div>
+  </div>`;
+}
+
+/* ===== troca de modelo ===== */
+function show(id, scroll) {
+  if (!niche) {
+    info.innerHTML = ""; info.hidden = true;
+    stage.innerHTML = pickerHTML();
+    if (scroll) window.scrollTo({ top: 0 });
+    return;
+  }
+  info.hidden = false;
+  const ms = list();
+  if (!ms.some(m => m.id === id) && id !== "seguranca") id = ms[0].id;
+  tabsEl.querySelectorAll(".v-tab").forEach(t => t.setAttribute("aria-selected", t.dataset.id === id));
+  store.set("vitrine-tab-" + niche, id);
+  if (id === "seguranca") {
+    info.innerHTML = `<div><h1>O que vem no site</h1><p>Recursos de cada versão, segurança e o que dá para acrescentar.</p></div>`;
+    stage.innerHTML = securityHTML();
+  } else {
+    const m = ms.find(x => x.id === id), n = ms.indexOf(m) + 1;
+    info.innerHTML = `<div><h1>Modelo ${n} · ${esc(m.tab)}</h1><p>${esc(m.pitch)}</p></div><div class="v-chips"><span class="v-chip">Versão: <b>${esc(m.tier)}</b></span><span class="v-chip">Porte: <b>${esc(m.size)}</b></span>${m.feats.map(f => `<span class="v-chip">${esc(f)}</span>`).join("")}</div>`;
+    stage.innerHTML = `<div class="v-outer"><div class="v-frame"><div class="v-bar"><i></i><i></i><i></i><span class="url">https://${esc(m.domain)}</span></div>${siteHTML(m)}</div></div>`;
+    wire(m);
+  }
+  if (scroll) window.scrollTo({ top: 0 });
+}
+
+/* entrada: #barbearia / #salao (ou o id de um modelo) abre direto; senão, o último segmento escolhido; senão, a escolha */
+function route(h, scroll) {
+  const m = MODELS.find(x => x.id === h);
+  const n = h === "barbearia" || h === "barbeiro" ? "barbearia" : h === "salao" || h === "salão" || h === "beleza" ? "salao"
+    : m ? (m.group === "Barbearia" ? "barbearia" : "salao") : null;
+  if (n) { if (n !== niche) setNiche(n); show(m ? m.id : store.get("vitrine-tab-" + n) || "", scroll); return true; }
+  return false;
+}
+const start = decodeURIComponent((location.hash || "").slice(1));
+if (!route(start, false)) { setNiche(store.get("vitrine-nicho")); show(niche ? store.get("vitrine-tab-" + niche) || "" : "", false); }
+window.addEventListener("hashchange", () => route(decodeURIComponent(location.hash.slice(1)), true));
+</script>
+</body></html>
